@@ -20,8 +20,10 @@ jobs:
           ref: valeaction
       - name: Bootstrap
         run: |
-          echo $0
           brew install asciidoctor bmake hugo vale
+          export GEM_PATH="$(gem environment gemdir)"
+          export PATH="$(brew --prefix ruby)/bin:$PATH"
+          gem install rouge asciidoctor asciidoctor-pdf asciidoctor-epub3
       - name: Test
         run: |
           bmake HUGO_ARGS="--verbose --debug"
