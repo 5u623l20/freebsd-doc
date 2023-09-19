@@ -1,0 +1,40 @@
+---
+name: Main
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - valeaction
+
+jobs:
+  deploy:
+    name: Install Chezmoi from Github repo | ${{ matrix.name }}
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: FreeBSD
+            distro: freebsd/FreeBSD-12.4-STABLE
+          - name: Alpine
+            distro: roboxes/alpine317
+    steps:
+      - name: Bootstrap
+        uses: 5u623l20/github-actions-vagrantup@main
+        with:
+          mem: 4096
+          box: freebsd/FreeBSD-12.4-RELEASE
+          run: |
+            pwd
+            cd
+            mkdir -p /usr/local/eeetttc/pkg/repos
+            sed -e 's/quarterly/latest' /etc/pkg/FreeBSD.conf > /usr/local/etc/pkg/repos/FreeBSD.conf
+            pkg update
+            pkg install -y docproj
+      - name: Test
+        run: |
+          make HUGO_ARGS="--verbose --debug"
+      - name: Lint
+        run: |
+          vale .
