@@ -20,12 +20,10 @@ jobs:
           ref: valeaction
       - name: Bootstrap
         run: |
-          pwd
-          ls -la
           brew install bmake vale
       - name: Test
         run: |
-          make HUGO_ARGS="--verbose --debug"
+          bmake HUGO_ARGS="--verbose --debug"
       - name: Lint
         run: |
           vale .
