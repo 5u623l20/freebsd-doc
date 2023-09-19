@@ -17,6 +17,7 @@ jobs:
       - name: Bootstrap
         run: |
           pwd
+          ls -la
           brew install bmake vale
       - name: Test
         run: |
