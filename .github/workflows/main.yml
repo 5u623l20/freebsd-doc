@@ -15,17 +15,9 @@ jobs:
       fail-fast: false
     steps:
       - name: Bootstrap
-        uses: 5u623l20/github-actions-vagrantup@main
-        with:
-          mem: 4096
-          box: freebsd/FreeBSD-12.4-RELEASE
-          run: |
-            pwd
-            cd
-            mkdir -p /usr/local/etc/pkg/repos
-            sed -e "s/quarterly/latest/g" /etc/pkg/FreeBSD.conf > /usr/local/etc/pkg/repos/FreeBSD.conf
-            pkg update
-            pkg install -y docproj
+        run: |
+          pwd
+          brew install bmake vale
       - name: Test
         run: |
           make HUGO_ARGS="--verbose --debug"
