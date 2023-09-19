@@ -20,7 +20,7 @@ jobs:
           ref: valeaction
       - name: Bootstrap
         run: |
-          brew install bmake vale
+          brew install bmake hugo vale
       - name: Test
         run: |
           bmake HUGO_ARGS="--verbose --debug"
