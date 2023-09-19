@@ -26,7 +26,7 @@ jobs:
           gem install rouge asciidoctor asciidoctor-pdf asciidoctor-epub3
       - name: Test
         run: |
-          bmake HUGO_ARGS="--verbose --debug"
+          bmake USE_RUBYGEMS=YES RUBY_CMD=$(brew --prefix ruby)/bin/ruby HUGO_ARGS="--verbose --debug"
       - name: Lint
         run: |
           vale .
