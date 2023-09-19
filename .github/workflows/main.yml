@@ -13,12 +13,6 @@ jobs:
     runs-on: macos-12
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - name: FreeBSD
-            distro: freebsd/FreeBSD-12.4-STABLE
-          - name: Alpine
-            distro: roboxes/alpine317
     steps:
       - name: Bootstrap
         uses: 5u623l20/github-actions-vagrantup@main
@@ -28,7 +22,7 @@ jobs:
           run: |
             pwd
             cd
-            mkdir -p /usr/local/eeetttc/pkg/repos
+            mkdir -p /usr/local/etc/pkg/repos
             sed -e 's/quarterly/latest' /etc/pkg/FreeBSD.conf > /usr/local/etc/pkg/repos/FreeBSD.conf
             pkg update
             pkg install -y docproj
