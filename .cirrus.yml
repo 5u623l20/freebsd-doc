@@ -5,7 +5,7 @@ env:
   CIRRUS_CLONE_DEPTH: 1
 
 task:
-  timeout_in: 60m
+  timeout_in: 120m
   install_script:
     - pkg install -y docproj
   test_script:
