@@ -19,6 +19,6 @@ jobs:
         with:
           ref: valeaction
       - name: Install tools
-        run: brew install vale
+        run: brew install asciidoctor vale
       - name: Lint
         run: vale .
